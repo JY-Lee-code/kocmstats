@@ -1,0 +1,88 @@
+{
+  "name": "kocmstats",
+  "version": "1.0.0",
+  "description": "Excel data analyzer for novels and webtoons revenue",
+  "main": "main.js",
+  "homepage": "./",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && sleep 2 && electron .\"",
+    "electron-start": "electron .",
+    "build:electron": "npm run build && electron-builder",
+    "dist": "npm run build && electron-builder --publish=never",
+    "build:win": "npm run build && electron-builder --win --x64",
+    "build:win-installer": "npm run build && electron-builder --win --x64 --publish=never"
+  },
+  "keywords": [
+    "excel",
+    "analyzer",
+    "electron",
+    "revenue"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.2.0",
+    "electron": "^33.3.0",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "wait-on": "^8.0.4"
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.3.16",
+    "papaparse": "^5.5.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "xlsx": "^0.18.5",
+    "xlsx-js-style": "^1.2.0"
+  },
+  "build": {
+    "appId": "com.kocmstats.app",
+    "productName": "KOCM Stats",
+
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js",
+      "node_modules/**/*"
+    ],
+    "extraResources": [],
+    "extraFiles": [],
+    "directories": {
+      "output": "build",
+      "buildResources": "public"
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+          "win": {
+        "target": [
+          {
+            "target": "nsis",
+            "arch": ["x64"]
+          }
+        ],
+        "icon": "public/icon-256.ico"
+      },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "KOCM Stats",
+      "installerIcon": "public/icon-256.ico",
+      "uninstallerIcon": "public/icon-256.ico"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

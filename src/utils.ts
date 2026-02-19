@@ -1,16 +1,18 @@
 import { StatsData } from './types';
 
-export const normalizeTitle = (title: string, platform: 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' = 'naver'): string => {
+export const normalizeTitle = (title: string, platform: 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly' = 'naver'): string => {
   if (!title) return '';
   
   let normalized = title.toString().trim();
   // [e북], [단행본], [독점] 등 모든 대괄호 텍스트 제거
   normalized = normalized.replace(/\s*\[.*?\]/g, '');
+  // 숫자+권 형식 제거 (예: "31권", "1권" 등)
+  normalized = normalized.replace(/\s*\d+권/g, '');
   // (부제) 제거
   normalized = normalized.replace(/\s*\([^)]*\)$/, '');
   // 공백 정리
   normalized = normalized.replace(/\s+/g, '').toLowerCase();
-  
+
   return normalized;
 };
 

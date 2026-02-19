@@ -22,7 +22,12 @@ export interface ProcessedData {
   etcWebtoonTotalIncome?: number;
   totalIncome?: number;
   totalWebtoonIncome?: number;
-  platform: 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly';
+  // 네이버 월간용 fee 필드들
+  majorTitlesFee?: { [title: string]: number };
+  etcTitlesFee?: { [title: string]: number };
+  etcTotalFee?: number;
+  totalFee?: number;
+  platform: 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly';
   // 정규화된 제목 → 원본 제목 매핑
   titleMappings: { [normalizedTitle: string]: string };
   webtoonTitleMappings?: { [normalizedTitle: string]: string };

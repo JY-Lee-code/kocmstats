@@ -42,7 +42,7 @@ body {
 
 /* 메인 컨텐츠 */
 .app-main {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -67,9 +67,17 @@ section h2 {
 /* 플랫폼 선택 */
 .platform-selector {
   display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.platform-row {
+  display: flex;
   gap: 15px;
   justify-content: center;
-  margin-bottom: 10px;
+  flex-wrap: nowrap;
 }
 
 .platform-selector label {
@@ -84,6 +92,8 @@ section h2 {
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
+  min-width: fit-content;
 }
 
 .platform-selector label:hover {

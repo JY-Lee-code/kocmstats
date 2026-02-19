@@ -1,6 +1,6 @@
 {
   "name": "kocmstats",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Excel data analyzer for novels and webtoons revenue",
   "main": "main.js",
   "homepage": "./",

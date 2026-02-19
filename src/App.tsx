@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [resultFilePath, setResultFilePath] = useState<string>('');
   const [statsFileName, setStatsFileName] = useState<string>('');
   const [resultFileName, setResultFileName] = useState<string>('');
-  const [platform, setPlatform] = useState<'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly'>('naver');
+  const [platform, setPlatform] = useState<'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly'>('naver');
   const [statsData, setStatsData] = useState<StatsData[]>([]);
   const [resultData, setResultData] = useState<ResultData[]>([]);
   const [processedData, setProcessedData] = useState<ProcessedData | null>(null);
@@ -271,46 +271,80 @@ const App: React.FC = () => {
                  <section className="platform-section">
            <h2>1. 플랫폼 선택</h2>
            <div className="platform-selector">
-             <label>
-               <input
-                 type="radio"
-                 name="platform"
-                 value="naver"
-                 checked={platform === 'naver'}
-                 onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly')}
-               />
-               <span>📚 네이버</span>
-             </label>
-             <label>
-               <input
-                 type="radio"
-                 name="platform"
-                 value="kakao"
-                 checked={platform === 'kakao'}
-                 onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly')}
-               />
-               <span>📖 카카오</span>
-             </label>
-             <label>
-               <input
-                 type="radio"
-                 name="platform"
-                 value="ridibooks"
-                 checked={platform === 'ridibooks'}
-                 onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly')}
-               />
-               <span>📘 리디북스</span>
-             </label>
-             <label>
-               <input
-                 type="radio"
-                 name="platform"
-                 value="ridibooks-monthly"
-                 checked={platform === 'ridibooks-monthly'}
-                 onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly')}
-               />
-               <span>📅 리디북스 월간</span>
-             </label>
+             <div className="platform-row">
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="naver"
+                   checked={platform === 'naver'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>📚 네이버</span>
+               </label>
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="kakao"
+                   checked={platform === 'kakao'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>📖 카카오</span>
+               </label>
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="ridibooks"
+                   checked={platform === 'ridibooks'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>📘 리디북스</span>
+               </label>
+             </div>
+             <div className="platform-row">
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="naver-monthly"
+                   checked={platform === 'naver-monthly'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>📅 네이버 월정산</span>
+               </label>
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="kakao-monthly"
+                   checked={platform === 'kakao-monthly'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>📆 카카오 월정산</span>
+               </label>
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="ridibooks-monthly"
+                   checked={platform === 'ridibooks-monthly'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>📅 리디북스 월정산</span>
+               </label>
+               <label>
+                 <input
+                   type="radio"
+                   name="platform"
+                   value="onestore-monthly"
+                   checked={platform === 'onestore-monthly'}
+                   onChange={(e) => setPlatform(e.target.value as 'naver' | 'kakao' | 'ridibooks' | 'ridibooks-monthly' | 'kakao-monthly' | 'naver-monthly' | 'onestore-monthly')}
+                 />
+                 <span>🏪 원스토어 월정산</span>
+               </label>
+             </div>
            </div>
          </section>
 
@@ -417,6 +451,33 @@ const App: React.FC = () => {
                           ).length
                         }개</p>
                       </>
+                    ) : platform === 'kakao-monthly' ? (
+                      <p><strong>기존 제목 수:</strong> {
+                        resultData.slice(2).filter((row: any) =>
+                          row && Array.isArray(row) && row[0] &&
+                          typeof row[0] === 'string' && row[0].trim() &&
+                          row[0] !== '제목' && row[0] !== '기타' && row[0] !== '합계' &&
+                          row[0].length > 1
+                        ).length
+                      }개</p>
+                    ) : platform === 'naver-monthly' ? (
+                      <p><strong>기존 제목 수:</strong> {
+                        resultData.slice(2).filter((row: any) =>
+                          row && Array.isArray(row) && row[0] &&
+                          typeof row[0] === 'string' && row[0].trim() &&
+                          row[0] !== '제목' && row[0] !== '기타' && row[0] !== '합계' &&
+                          row[0].length > 1
+                        ).length
+                      }개</p>
+                    ) : platform === 'onestore-monthly' ? (
+                      <p><strong>기존 제목 수:</strong> {
+                        resultData.slice(2).filter((row: any) =>
+                          row && Array.isArray(row) && row[0] &&
+                          typeof row[0] === 'string' && row[0].trim() &&
+                          row[0] !== '제목' && row[0] !== '기타' && row[0] !== '합계' &&
+                          row[0].length > 1
+                        ).length
+                      }개</p>
                     ) : (
                       <p><strong>기존 제목 수:</strong> {
                         resultData[1] && Array.isArray(resultData[1]) ?
